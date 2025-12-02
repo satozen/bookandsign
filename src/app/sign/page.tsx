@@ -1,7 +1,7 @@
 /*
- * E-Sign Page de Signature de Contrat
- * Affiche les termes du contrat avec les disponibilités sélectionnées
- * L'utilisateur dessine sa signature et soumet pour compléter la réservation
+ * E-Sign - Page de Signature du Contrat
+ * Contrat d'installation laveuse/sécheuse avec détails et tarification
+ * L'utilisateur dessine sa signature pour confirmer
  */
 
 'use client'
@@ -10,11 +10,21 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './sign.module.css'
 
+interface TimeSlot {
+  day: string
+  period: string
+}
+
 interface BookingData {
   name: string
   email: string
-  dates: string[]
+  phone: string
+  address: string
+  floor: string
   service: string
+  serviceName: string
+  price: number
+  availability: TimeSlot[]
 }
 
 export default function SignPage() {
@@ -26,7 +36,6 @@ export default function SignPage() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    // Récupérer les données de réservation depuis sessionStorage
     const data = sessionStorage.getItem('bookingData')
     if (data) {
       setBooking(JSON.parse(data))
@@ -34,7 +43,6 @@ export default function SignPage() {
       router.push('/')
     }
 
-    // Configurer le canvas
     const canvas = canvasRef.current
     if (canvas) {
       const ctx = canvas.getContext('2d')
@@ -110,11 +118,7 @@ export default function SignPage() {
     if (!hasSignature) return
     
     setLoading(true)
-    
-    // Récupérer la signature en URL de données
     const signatureData = canvasRef.current?.toDataURL()
-    
-    // Stocker la signature et naviguer vers la confirmation
     sessionStorage.setItem('signatureData', signatureData || '')
     
     setTimeout(() => {
@@ -122,26 +126,28 @@ export default function SignPage() {
     }, 800)
   }
 
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('fr-CA', {
-      weekday: 'short',
-      day: 'numeric',
-      month: 'short'
-    })
-  }
-
   if (!booking) return null
+
+  const taxAmount = booking.price * 0.14975
+  const totalAmount = booking.price + taxAmount
+
+  // Group availability by day
+  const groupedAvailability = booking.availability.reduce((acc, slot) => {
+    if (!acc[slot.day]) acc[slot.day] = []
+    acc[slot.day].push(slot.period)
+    return acc
+  }, {} as Record<string, string[]>)
 
   return (
     <main className={styles.page}>
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1>Signer le contrat</h1>
-          <p>Révisez et signez pour confirmer votre réservation</p>
+          <h1>Contrat d'installation</h1>
+          <p>Révisez et signez pour confirmer</p>
         </header>
 
         <div className={styles.contract}>
-          <h2>Contrat de location</h2>
+          <h2>Détails du service</h2>
           
           <div className={styles.details}>
             <div className={styles.row}>
@@ -149,28 +155,54 @@ export default function SignPage() {
               <strong>{booking.name}</strong>
             </div>
             <div className={styles.row}>
+              <span>Téléphone</span>
+              <strong>{booking.phone}</strong>
+            </div>
+            <div className={styles.row}>
               <span>Service</span>
-              <strong>{booking.service}</strong>
+              <strong>{booking.serviceName}</strong>
             </div>
           </div>
 
-          <div className={styles.datesSection}>
-            <span className={styles.datesLabel}>Disponibilités</span>
-            <div className={styles.datesList}>
-              {booking.dates.map(date => (
-                <span key={date} className={styles.dateTag}>
-                  {formatDate(date)}
-                </span>
+          <div className={styles.addressSection}>
+            <span className={styles.label}>📍 Adresse d'installation</span>
+            <p className={styles.addressText}>{booking.address}</p>
+            <p className={styles.floorText}>Étage: {booking.floor}</p>
+          </div>
+
+          <div className={styles.availabilitySection}>
+            <span className={styles.label}>📅 Disponibilités</span>
+            <div className={styles.slotsList}>
+              {Object.entries(groupedAvailability).map(([day, periods]) => (
+                <div key={day} className={styles.slotRow}>
+                  <span className={styles.slotDay}>{day}:</span>
+                  <span className={styles.slotPeriods}>{periods.join(', ')}</span>
+                </div>
               ))}
+            </div>
+          </div>
+
+          <div className={styles.pricing}>
+            <div className={styles.priceRow}>
+              <span>Sous-total</span>
+              <span>{booking.price.toFixed(2)}$</span>
+            </div>
+            <div className={styles.priceRow}>
+              <span>TPS + TVQ</span>
+              <span>{taxAmount.toFixed(2)}$</span>
+            </div>
+            <div className={`${styles.priceRow} ${styles.total}`}>
+              <span>Total à payer</span>
+              <span>{totalAmount.toFixed(2)}$</span>
             </div>
           </div>
 
           <div className={styles.terms}>
             <p>
-              En signant ci-dessous, j'accepte les termes et conditions de location. 
-              J'accepte la responsabilité de l'équipement pendant la période de location 
-              et j'accepte les modalités de paiement spécifiées. Je confirme mes disponibilités 
-              pour les dates indiquées ci-dessus.
+              En signant ci-dessous, je confirme ma demande d'installation et j'accepte 
+              les conditions suivantes: le paiement sera effectué lors de l'installation, 
+              je m'engage à être présent(e) au moment convenu, et je confirme que 
+              l'emplacement est prêt pour l'installation de l'appareil.
             </p>
           </div>
         </div>

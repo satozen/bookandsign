@@ -1,56 +1,71 @@
 /*
- * Styles Page d'accueil
- * Formulaire de réservation épuré avec accent orange chaleureux
- * Support pour sélection de dates multiples
+ * Styles Page d'accueil - Installation Laveuse/Sécheuse
+ * Formulaire complet avec créneaux horaires et tarification
  */
 
 .page {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 1.5rem;
+  padding-bottom: 3rem;
 }
 
 .container {
   width: 100%;
-  max-width: 400px;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .logo {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
 .header h1 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   margin-bottom: 0.25rem;
 }
 
 .header p {
   color: var(--color-warm-gray);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .form {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
 
+/* Sections */
+.section {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+
+.section h2 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* Fields */
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.field:last-child {
+  margin-bottom: 0;
 }
 
 .field label {
@@ -61,7 +76,7 @@
 
 .field input,
 .field select {
-  padding: 0.875rem 1rem;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 2px solid #eee;
   border-radius: 10px;
@@ -91,101 +106,145 @@
   padding-right: 2.5rem;
 }
 
-/* Date input with add button */
-.dateInput {
+/* Service options */
+.serviceOptions {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
-.dateInput input {
-  flex: 1;
-}
-
-.addBtn {
+.serviceCard {
+  display: flex;
+  align-items: center;
   padding: 0.875rem 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-terracotta);
-  background: white;
-  border: 2px solid var(--color-terracotta);
+  border: 2px solid #eee;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
-  white-space: nowrap;
+  background: #fafafa;
 }
 
-.addBtn:hover:not(:disabled) {
-  background: var(--color-terracotta);
-  color: white;
+.serviceCard:hover {
+  border-color: #ddd;
 }
 
-.addBtn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.serviceCard.selected {
+  border-color: var(--color-terracotta);
+  background: #fef9f7;
 }
 
-/* Selected dates list */
-.datesList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
+.serviceCard input {
+  display: none;
 }
 
-.dateTag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  background: #f0ebe7;
-  border-radius: 20px;
-  font-size: 0.85rem;
+.serviceName {
+  flex: 1;
+  font-size: 0.95rem;
   color: var(--color-charcoal);
 }
 
-.dateTag span {
-  text-transform: capitalize;
+.servicePrice {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--color-terracotta);
 }
 
-.removeBtn {
+/* Price breakdown */
+.priceBreakdown {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #ddd;
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--color-warm-gray);
+  margin-bottom: 0.25rem;
+}
+
+.priceRow.total {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-charcoal);
+}
+
+/* Schedule grid */
+.hint {
+  font-size: 0.85rem;
+  color: var(--color-warm-gray);
+  margin-bottom: 0.75rem;
+}
+
+.scheduleGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.dayRow {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  padding: 0;
-  font-size: 1rem;
-  line-height: 1;
+  gap: 0.75rem;
+}
+
+.dayName {
+  width: 80px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-charcoal);
+}
+
+.periods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.periodBtn {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--color-warm-gray);
-  background: transparent;
-  border: none;
-  border-radius: 50%;
+  background: #f5f5f5;
+  border: 2px solid transparent;
+  border-radius: 20px;
   cursor: pointer;
   transition: all 0.15s ease;
+  font-family: inherit;
 }
 
-.removeBtn:hover {
+.periodBtn:hover {
+  background: #eee;
+}
+
+.periodBtn.periodSelected {
   background: var(--color-terracotta);
   color: white;
+  border-color: var(--color-terracotta);
 }
 
-.hint {
-  font-size: 0.8rem;
-  color: var(--color-warm-gray);
-  font-style: italic;
-  margin-top: 0.25rem;
+.warning {
+  font-size: 0.85rem;
+  color: #c45a5a;
+  margin-top: 0.75rem;
+  text-align: center;
 }
 
+/* Submit button */
 .submitBtn {
-  margin-top: 0.5rem;
   padding: 1rem;
   font-size: 1rem;
   font-weight: 600;
   color: white;
   background: var(--color-terracotta);
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: inherit;

@@ -1,19 +1,18 @@
 /*
- * Styles Page de Confirmation
- * État de succès avec affichage du résumé de réservation
+ * Styles Page de Confirmation - Installation Laveuse/Sécheuse
+ * État de succès avec résumé complet
  */
 
 .page {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 1.5rem;
+  padding-bottom: 3rem;
 }
 
 .container {
   width: 100%;
   max-width: 420px;
+  margin: 0 auto;
 }
 
 .success {
@@ -64,6 +63,7 @@
   padding: 1.5rem;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
 }
 
 .card h2 {
@@ -85,7 +85,7 @@
   align-items: flex-start;
 }
 
-.row span {
+.row > span {
   font-size: 1.25rem;
 }
 
@@ -93,6 +93,7 @@
   display: block;
   font-size: 0.95rem;
   margin-bottom: 0.125rem;
+  color: var(--color-charcoal);
 }
 
 .row div p {
@@ -100,34 +101,34 @@
   color: var(--color-warm-gray);
 }
 
-/* Dates section */
-.datesSection {
+/* Availability section */
+.availabilitySection {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid #eee;
 }
 
-.datesSection label {
+.availabilitySection label {
   display: block;
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
 }
 
-.datesList {
+.slotsList {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.dateTag {
-  display: inline-block;
-  padding: 0.4rem 0.7rem;
-  background: #f0ebe7;
-  border-radius: 16px;
-  font-size: 0.8rem;
+.slotItem {
+  font-size: 0.85rem;
+  color: var(--color-warm-gray);
+}
+
+.slotItem strong {
   color: var(--color-charcoal);
-  text-transform: capitalize;
+  font-weight: 500;
 }
 
 .signaturePreview {
@@ -151,9 +152,38 @@
   background: #fafafa;
 }
 
+/* Next steps */
+.nextSteps {
+  background: #f0f9f4;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.nextSteps h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  color: #2d6a4f;
+}
+
+.nextSteps ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nextSteps li {
+  font-size: 0.85rem;
+  color: #40916c;
+  margin-bottom: 0.4rem;
+}
+
+.nextSteps li:last-child {
+  margin-bottom: 0;
+}
+
 .actions {
   text-align: center;
-  margin-top: 1.5rem;
 }
 
 .actions p {

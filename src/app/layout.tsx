@@ -1,14 +1,15 @@
 /*
- * E-Sign Plateforme de Réservation - Layout Principal
- * Application simple de réservation + signature électronique pour mobile
+ * E-Sign - Service d'installation Laveuse/Sécheuse
+ * Application de réservation et signature électronique
+ * Laveuse ou sécheuse: 35$ | Les deux: 60$ + taxes
  */
 
 import '../styles/globals.css'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'E-Sign | Réserver & Signer',
-  description: 'Plateforme simple de réservation et signature électronique',
+  title: 'Installation Laveuse/Sécheuse | Réservation',
+  description: 'Réservez votre installation de laveuse ou sécheuse et signez le contrat en ligne',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 }
 
