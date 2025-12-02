@@ -1,0 +1,162 @@
+/*
+ * Signature Page Styles
+ * Clean contract display with touch-optimized signature canvas
+ */
+
+.page {
+  min-height: 100vh;
+  padding: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.header p {
+  color: var(--color-warm-gray);
+  font-size: 0.9rem;
+}
+
+.contract {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.25rem;
+}
+
+.contract h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row span {
+  color: var(--color-warm-gray);
+  font-size: 0.9rem;
+}
+
+.row strong {
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+.terms {
+  background: #f8f8f8;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.terms p {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-warm-gray);
+}
+
+.signatureSection {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.25rem;
+}
+
+.signatureHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.signatureHeader label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  color: var(--color-terracotta);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-family: inherit;
+}
+
+.canvasWrapper {
+  position: relative;
+  background: #fafafa;
+  border: 2px dashed #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #aaa;
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: white;
+  background: var(--color-terracotta);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--color-terracotta-dark);
+  transform: translateY(-1px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
