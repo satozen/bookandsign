@@ -1,7 +1,7 @@
 /*
- * E-Sign Contract Signing Page
- * Displays contract terms and provides touch-optimized signature pad
- * User draws signature and submits to complete booking
+ * E-Sign Page de Signature de Contrat
+ * Affiche les termes du contrat avec les disponibilités sélectionnées
+ * L'utilisateur dessine sa signature et soumet pour compléter la réservation
  */
 
 'use client'
@@ -13,7 +13,7 @@ import styles from './sign.module.css'
 interface BookingData {
   name: string
   email: string
-  date: string
+  dates: string[]
   service: string
 }
 
@@ -26,7 +26,7 @@ export default function SignPage() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    // Get booking data from sessionStorage
+    // Récupérer les données de réservation depuis sessionStorage
     const data = sessionStorage.getItem('bookingData')
     if (data) {
       setBooking(JSON.parse(data))
@@ -34,7 +34,7 @@ export default function SignPage() {
       router.push('/')
     }
 
-    // Set up canvas
+    // Configurer le canvas
     const canvas = canvasRef.current
     if (canvas) {
       const ctx = canvas.getContext('2d')
@@ -111,10 +111,10 @@ export default function SignPage() {
     
     setLoading(true)
     
-    // Get signature as data URL
+    // Récupérer la signature en URL de données
     const signatureData = canvasRef.current?.toDataURL()
     
-    // Store signature and navigate to confirmation
+    // Stocker la signature et naviguer vers la confirmation
     sessionStorage.setItem('signatureData', signatureData || '')
     
     setTimeout(() => {
@@ -123,11 +123,10 @@ export default function SignPage() {
   }
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateStr).toLocaleDateString('fr-CA', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short'
     })
   }
 
@@ -137,12 +136,12 @@ export default function SignPage() {
     <main className={styles.page}>
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1>Sign Contract</h1>
-          <p>Review and sign to confirm your booking</p>
+          <h1>Signer le contrat</h1>
+          <p>Révisez et signez pour confirmer votre réservation</p>
         </header>
 
         <div className={styles.contract}>
-          <h2>Rental Agreement</h2>
+          <h2>Contrat de location</h2>
           
           <div className={styles.details}>
             <div className={styles.row}>
@@ -153,27 +152,35 @@ export default function SignPage() {
               <span>Service</span>
               <strong>{booking.service}</strong>
             </div>
-            <div className={styles.row}>
-              <span>Date</span>
-              <strong>{formatDate(booking.date)}</strong>
+          </div>
+
+          <div className={styles.datesSection}>
+            <span className={styles.datesLabel}>Disponibilités</span>
+            <div className={styles.datesList}>
+              {booking.dates.map(date => (
+                <span key={date} className={styles.dateTag}>
+                  {formatDate(date)}
+                </span>
+              ))}
             </div>
           </div>
 
           <div className={styles.terms}>
             <p>
-              By signing below, I agree to the rental terms and conditions. 
-              I accept responsibility for the equipment during the rental period 
-              and agree to the payment terms specified.
+              En signant ci-dessous, j'accepte les termes et conditions de location. 
+              J'accepte la responsabilité de l'équipement pendant la période de location 
+              et j'accepte les modalités de paiement spécifiées. Je confirme mes disponibilités 
+              pour les dates indiquées ci-dessus.
             </p>
           </div>
         </div>
 
         <div className={styles.signatureSection}>
           <div className={styles.signatureHeader}>
-            <label>Your Signature</label>
+            <label>Votre signature</label>
             {hasSignature && (
               <button className={styles.clearBtn} onClick={clearSignature}>
-                Clear
+                Effacer
               </button>
             )}
           </div>
@@ -194,7 +201,7 @@ export default function SignPage() {
             />
             {!hasSignature && (
               <div className={styles.placeholder}>
-                ✍️ Draw your signature here
+                ✍️ Dessinez votre signature ici
               </div>
             )}
           </div>
@@ -205,10 +212,9 @@ export default function SignPage() {
           onClick={handleSubmit}
           disabled={!hasSignature || loading}
         >
-          {loading ? 'Submitting...' : 'Confirm & Sign ✓'}
+          {loading ? 'Envoi en cours...' : 'Confirmer et signer ✓'}
         </button>
       </div>
     </main>
   )
 }
-

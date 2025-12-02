@@ -1,48 +1,47 @@
-# E-Sign Booking Platform
+# E-Sign Plateforme de Réservation
 
-A simple, mobile-first booking and e-signature app. Users can book a service and sign a contract directly on their phone.
+Une application simple et mobile de réservation et signature électronique. Les utilisateurs peuvent réserver un service et signer un contrat directement sur leur téléphone.
 
-## Features
+## Fonctionnalités
 
-- 📱 **Mobile-optimized** - Touch-friendly signature pad
-- ✍️ **E-signature** - Draw signature with finger or stylus
-- 📅 **Simple booking** - Quick form with date and service selection
-- 🎨 **Clean design** - Warm, professional aesthetics
+- 📱 **Optimisé mobile** - Pad de signature tactile
+- ✍️ **Signature électronique** - Dessinez avec le doigt ou un stylet
+- 📅 **Réservation simple** - Formulaire rapide avec date et sélection de service
+- 🎨 **Design épuré** - Esthétique chaleureuse et professionnelle
 
 ## Pages
 
-1. **Home** (`/`) - Booking form with name, email, date, and service
-2. **Sign** (`/sign`) - Contract display with signature pad
-3. **Complete** (`/complete`) - Confirmation with booking summary
+1. **Accueil** (`/`) - Formulaire de réservation (nom, courriel, date, service)
+2. **Signature** (`/sign`) - Affichage du contrat + pad de signature
+3. **Confirmation** (`/complete`) - Résumé de la réservation + signature
 
-## Getting Started
+## Démarrage
 
 ```bash
-# Install dependencies
+# Installer les dépendances
 npm install
 
-# Run development server
+# Lancer le serveur de développement
 npm run dev
 
-# Build for production
+# Compiler pour la production
 npm run build
 ```
 
-## Deploy to Vercel
+## Déployer sur Vercel
 
 ```bash
-# Install Vercel CLI
+# Installer Vercel CLI
 npm i -g vercel
 
-# Deploy
+# Déployer
 vercel
 ```
 
-Or connect your GitHub repo to Vercel for automatic deployments.
+Ou connectez votre dépôt GitHub au tableau de bord Vercel pour des déploiements automatiques.
 
-## Tech Stack
+## Stack technique
 
 - Next.js 14 (App Router)
 - TypeScript
 - CSS Modules
-

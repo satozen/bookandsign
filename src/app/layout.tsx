@@ -1,14 +1,14 @@
 /*
- * E-Sign Booking Platform - Root Layout
- * Simple booking + e-signature app for mobile-first contract signing
+ * E-Sign Plateforme de Réservation - Layout Principal
+ * Application simple de réservation + signature électronique pour mobile
  */
 
 import '../styles/globals.css'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'E-Sign | Book & Sign',
-  description: 'Simple booking and e-signature platform',
+  title: 'E-Sign | Réserver & Signer',
+  description: 'Plateforme simple de réservation et signature électronique',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 }
 
@@ -18,9 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body>{children}</body>
     </html>
   )
 }
-

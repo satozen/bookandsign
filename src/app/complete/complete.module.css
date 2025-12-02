@@ -1,6 +1,6 @@
 /*
- * Confirmation Page Styles
- * Success state with booking summary display
+ * Styles Page de Confirmation
+ * État de succès avec affichage du résumé de réservation
  */
 
 .page {
@@ -100,6 +100,36 @@
   color: var(--color-warm-gray);
 }
 
+/* Dates section */
+.datesSection {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.datesSection label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.datesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.dateTag {
+  display: inline-block;
+  padding: 0.4rem 0.7rem;
+  background: #f0ebe7;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  color: var(--color-charcoal);
+  text-transform: capitalize;
+}
+
 .signaturePreview {
   margin-top: 1.25rem;
   padding-top: 1rem;
@@ -149,4 +179,3 @@
   background: var(--color-terracotta);
   color: white;
 }
-

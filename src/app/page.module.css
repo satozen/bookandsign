@@ -1,6 +1,7 @@
 /*
- * Home Page Styles
- * Clean, minimal booking form with warm orange accent
+ * Styles Page d'accueil
+ * Formulaire de réservation épuré avec accent orange chaleureux
+ * Support pour sélection de dates multiples
  */
 
 .page {
@@ -65,8 +66,13 @@
   border: 2px solid #eee;
   border-radius: 10px;
   background: #fafafa;
+  color: #2D2926;
   transition: all 0.2s ease;
   font-family: inherit;
+}
+
+.field input::placeholder {
+  color: #999;
 }
 
 .field input:focus,
@@ -83,6 +89,92 @@
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
+}
+
+/* Date input with add button */
+.dateInput {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dateInput input {
+  flex: 1;
+}
+
+.addBtn {
+  padding: 0.875rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-terracotta);
+  background: white;
+  border: 2px solid var(--color-terracotta);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.addBtn:hover:not(:disabled) {
+  background: var(--color-terracotta);
+  color: white;
+}
+
+.addBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Selected dates list */
+.datesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.dateTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #f0ebe7;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--color-charcoal);
+}
+
+.dateTag span {
+  text-transform: capitalize;
+}
+
+.removeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--color-warm-gray);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.removeBtn:hover {
+  background: var(--color-terracotta);
+  color: white;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--color-warm-gray);
+  font-style: italic;
+  margin-top: 0.25rem;
 }
 
 .submitBtn {
@@ -119,4 +211,3 @@
   color: var(--color-warm-gray);
   opacity: 0.7;
 }
-

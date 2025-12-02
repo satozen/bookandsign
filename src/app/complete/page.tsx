@@ -1,7 +1,7 @@
 /*
- * E-Sign Confirmation Page
- * Shows success message after contract is signed
- * Displays booking summary and signature confirmation
+ * E-Sign Page de Confirmation
+ * Affiche un message de succès après la signature du contrat
+ * Affiche le résumé avec les disponibilités et la signature
  */
 
 'use client'
@@ -13,7 +13,7 @@ import styles from './complete.module.css'
 interface BookingData {
   name: string
   email: string
-  date: string
+  dates: string[]
   service: string
 }
 
@@ -35,11 +35,10 @@ export default function CompletePage() {
   }, [router])
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-US', {
+    return new Date(dateStr).toLocaleDateString('fr-CA', {
       weekday: 'short',
-      month: 'short',
       day: 'numeric',
-      year: 'numeric'
+      month: 'short'
     })
   }
 
@@ -55,12 +54,12 @@ export default function CompletePage() {
       <div className={styles.container}>
         <div className={styles.success}>
           <div className={styles.checkmark}>✓</div>
-          <h1>Booking Confirmed!</h1>
-          <p>Your contract has been signed successfully</p>
+          <h1>Réservation confirmée!</h1>
+          <p>Votre contrat a été signé avec succès</p>
         </div>
 
         <div className={styles.card}>
-          <h2>Booking Details</h2>
+          <h2>Détails de la réservation</h2>
           
           <div className={styles.details}>
             <div className={styles.row}>
@@ -71,30 +70,40 @@ export default function CompletePage() {
               </div>
             </div>
             <div className={styles.row}>
-              <span>📅</span>
+              <span>🎉</span>
               <div>
-                <strong>{formatDate(booking.date)}</strong>
-                <p>{booking.service}</p>
+                <strong>{booking.service}</strong>
+                <p>Service sélectionné</p>
               </div>
+            </div>
+          </div>
+
+          <div className={styles.datesSection}>
+            <label>📅 Vos disponibilités</label>
+            <div className={styles.datesList}>
+              {booking.dates.map(date => (
+                <span key={date} className={styles.dateTag}>
+                  {formatDate(date)}
+                </span>
+              ))}
             </div>
           </div>
 
           {signature && (
             <div className={styles.signaturePreview}>
-              <label>Your Signature</label>
+              <label>Votre signature</label>
               <img src={signature} alt="Signature" />
             </div>
           )}
         </div>
 
         <div className={styles.actions}>
-          <p>A confirmation email has been sent to {booking.email}</p>
+          <p>Un courriel de confirmation a été envoyé à {booking.email}</p>
           <button className={styles.newBtn} onClick={handleNewBooking}>
-            Make Another Booking
+            Faire une autre réservation
           </button>
         </div>
       </div>
     </main>
   )
 }
-
